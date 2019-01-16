@@ -18,16 +18,16 @@
             </span>
         </span>
 
-        <span class="guide-item" :class="{on: '/invite'===$route.path}" @click="goTo('/invite')">
-            <span class="item-icon">
-                <i class="iconfont icon-redpacket"></i>
-            </span>
-            <span>
-                赚红包
-            </span>
-        </span>
+        <!--<span class="guide-item" :class="{on: '/invite'===$route.path }" @click="goTo('/invite')">-->
+            <!--<span class="item-icon">-->
+                <!--<i class="iconfont icon-redpacket"></i>-->
+            <!--</span>-->
+            <!--<span>-->
+                <!--赚红包-->
+            <!--</span>-->
+        <!--</span>-->
 
-        <span class="guide-item" :class="{on: '/order'===$route.path}" @click="goTo('/order')">
+        <span class="guide-item" :class="{on:'/order'===$route.path || $route.path.match(/detail/)}" @click="goTo('/order')">
             <span class="item-icon">
                 <i class="iconfont icon-order"></i>
             </span>
@@ -50,10 +50,14 @@
 <script>
     export default {
         name: 'FooterGuide',
+        mounted(){
+        },
         methods: {
             goTo(path) {
                 this.$router.replace(path)
-            }
+            },
+
+
         }
     }
 </script>

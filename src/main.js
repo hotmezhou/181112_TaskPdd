@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 import YDUI from 'vue-ydui'; /* 相当于import YDUI from 'vue-ydui/ydui.rem.js' */
 import 'vue-ydui/dist/ydui.px.css';
 /* 使用px：import 'vue-ydui/dist/ydui.px.css'; */
@@ -13,8 +14,9 @@ Vue.config.productionTip = false
 Vue.use(YDUI)
 
 const app = new Vue({
-    router: router,
-    render: v => v(App)
+    render: v => v(App),
+    router,
+    store,
 }).$mount('#app');
 
 document.addEventListener('DOMContentLoaded', function () {

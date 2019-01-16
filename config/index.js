@@ -5,65 +5,96 @@
 const path = require('path')
 
 module.exports = {
-  dev: {
+    dev: {
 
-    // Paths
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    proxyTable: {},
+        // Paths
+        assetsSubDirectory: 'static',
+        assetsPublicPath: '/',
+        proxyTable: { //api代理，应对api访问异步获取进行蒙蔽浏览器
+            '/api': { //匹配所有以'/api'开头的请求路径
+                target: 'http://apiv4.yangkeduo.com/', //代理目标的基础路径
+                changeOrigin: true, //支持跨域
+                pathRewrite: { //重写路径：去掉路径中开头的'/api'
+                    '^/api': '/'
+                }
+            },
+            '/ddapi': {
+                target: 'http://www.api.com/',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/ddapi': '/'
+                }
+            }
+        },
 
-    // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: true,
-    errorOverlay: true,
-    notifyOnErrors: true,
-    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+        // Various Dev Server settings
+        host: 'localhost', // can be overwritten by process.env.HOST
+        port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+        autoOpenBrowser: true,
+        errorOverlay: true,
+        notifyOnErrors: true,
+        poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
-    /**
-     * Source Maps
-     */
 
-    // https://webpack.js.org/configuration/devtool/#development
-    devtool: 'cheap-module-eval-source-map',
+        /**
+         * Source Maps
+         */
 
-    // If you have problems debugging vue-files in devtools,
-    // set this to false - it *may* help
-    // https://vue-loader.vuejs.org/en/options.html#cachebusting
-    cacheBusting: true,
+        // https://webpack.js.org/configuration/devtool/#development
+        devtool: 'cheap-module-eval-source-map',
 
-    cssSourceMap: true
-  },
+        // If you have problems debugging vue-files in devtools,
+        // set this to false - it *may* help
+        // https://vue-loader.vuejs.org/en/options.html#cachebusting
+        cacheBusting: true,
 
-  build: {
-    // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+        cssSourceMap: true
+    },
 
-    // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    build: {
+        // Template for index.html
+        index: path.resolve(__dirname, '../dist/index.html'),
 
-    /**
-     * Source Maps
-     */
+        // Paths
+        assetsRoot: path.resolve(__dirname, '../dist'),
+        assetsSubDirectory: 'static',
+        assetsPublicPath: '/',
+        proxyTable: { //api代理，应对api访问异步获取进行蒙蔽浏览器
+            '/pi': { //匹配所有以'/api'开头的请求路径
+                target: 'http://apiv4.yangkeduo.com/', //代理目标的基础路径
+                changeOrigin: true, //支持跨域
+                pathRewrite: { //重写路径：去掉路径中开头的'/api'
+                    '^/pi': '/'
+                }
+            },
+            '/api': {
+                target: 'http://api.ddhaoping.com/',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '/'
+                }
+            }
+        },
 
-    productionSourceMap: true,
-    // https://webpack.js.org/configuration/devtool/#production
-    devtool: '#source-map',
+        /**
+         * Source Maps
+         */
 
-    // Gzip off by default as many popular static hosts such as
-    // Surge or Netlify already gzip all static assets for you.
-    // Before setting to `true`, make sure to:
-    // npm install --save-dev compression-webpack-plugin
-    productionGzip: false,
-    productionGzipExtensions: ['js', 'css'],
+        productionSourceMap: true,
+        // https://webpack.js.org/configuration/devtool/#production
+        devtool: '#source-map',
 
-    // Run the build command with an extra argument to
-    // View the bundle analyzer report after build finishes:
-    // `npm run build --report`
-    // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report
-  }
+        // Gzip off by default as many popular static hosts such as
+        // Surge or Netlify already gzip all static assets for you.
+        // Before setting to `true`, make sure to:
+        // npm install --save-dev compression-webpack-plugin
+        productionGzip: false,
+        productionGzipExtensions: ['js', 'css'],
+
+        // Run the build command with an extra argument to
+        // View the bundle analyzer report after build finishes:
+        // `npm run build --report`
+        // Set to `true` or `false` to always turn it on or off
+        bundleAnalyzerReport: process.env.npm_config_report
+    }
 }

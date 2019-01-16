@@ -1,24 +1,30 @@
 <template>
-    <div>
-        <yd-navbar>
-            <router-link to="#" slot="left">
-                <yd-navbar-back-icon>返回</yd-navbar-back-icon>
-            </router-link>
-
-            <img slot="center" src="http://static.ydcss.com/www/img/logo.png"/>
-
-            <router-link to="#" slot="right">
-                <yd-navbar-next-icon>前进</yd-navbar-next-icon>
-            </router-link>
-        </yd-navbar>
+    <div class="order">
+        <home-header>
+            <span slot="icon-left">
+                <a href="javascript:;" @click="$router.back()">
+                    <i class="iconfont icon-return"></i>
+                </a>
+            </span>
+            <span slot="title">我的任务</span>
+        </home-header>
+        <order-list></order-list>
     </div>
 </template>
-
 <script>
+    import HomeHeader from "../../components/Header/HomeHeader"
+    import OrderList from "../../components/Order/OrderList"
+
     export default {
+        name: "Order",
+        components: {
+            HomeHeader,
+            OrderList
+        }
     }
 </script>
-
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-
+.order
+    margin-top 45px
+    overflow hidden
 </style>
